@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SampleAgility</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  
+     .example-wrapper { min-height: 280px; align-content: flex-start; }
+     .example-wrapper p, .example-col p { margin: 0 0 10px; }
+     .example-wrapper p:first-child, .example-col p:first-child { margin-top: 0; }
+     .example-col { display: inline-block; vertical-align: top; padding-right: 20px; padding-bottom: 20px; }
+     .example-config { margin: 0 0 20px; padding: 20px; background-color: rgba(0,0,0,.03); border: 1px solid rgba(0,0,0,.08); }
+     .event-log { margin: 0; padding: 0; max-height: 100px; overflow-y: auto; list-style-type: none; border: 1px solid rgba(0,0,0,.08); background-color: #fff; }
+     .event-log li {margin: 0; padding: .3em; line-height: 1.2em; border-bottom: 1px solid rgba(0,0,0,.08); }
+     .event-log li:last-child { margin-bottom: -1px;
+     }
+     .k-grid-header{color: #ffffff !important;
+   background-color: #8e8686 !important;}
+   .contextmenu{
+     z-index: 10001;
+   position: absolute;
+   background-color: #F5F5F5;
+   display: none;
+   box-shadow: 0 0 10px rgba( 0, 0, 0, .4 );
+   font-size: 11px;
+   font-family: sans-serif;
+   font-weight: bold;
+  border-radius: 2px; 
+  width: 40%; 
+   }
+   .k-grid tr.k-state-selected {
+    background-color: #f1bc9d;
+}
+   .k-grid-header-locked{
+    box-shadow: 0 0 20px rgba( 0, 0, 0, .4 );
+  }
+  .k-grid-content, .k-grid-content-locked, .k-pager-wrap {
+    white-space: normal;
+    box-shadow: 0 0 20px rgba( 0, 0, 0, .4 );
+}
+  .k-grid-lockedcolumns {
+    box-shadow: 0 0 10px rgba( 0, 0, 0, .4 );
+}
+   .k-pager-numbers .k-link.k-state-selected, .k-pager-numbers .k-link:link.k-state-selected{
+    border-radius: 50% !important;
+  }
+  .k-pager-wrap .k-link:hover, .k-pager-wrap .k-state-selected{
+   border-radius: 50% !important;
+  }
+   .kendo-pdf-export {
+     font-family: "DejaVu Sans", "Arial", sans-serif;
+     font-size: 12px;
+   }
+ 
+ kendo-splitter-pane
+ {
+   font-size: 12px;
+   margin-left: 10px;
+   margin-top: 8px;
+ }
+ kendo-tabstrip {
+   font-size: 12px;
+ }
+  
+  input.valid:not([type]), 
+  input.valid:not([type]):focus, 
+  input.valid[type=text]:not(.browser-default), 
+  input.valid[type=text]:not(.browser-default):focus, 
+  input.valid[type=password]:not(.browser-default), 
+  input.valid[type=password]:not(.browser-default):focus, 
+  input.valid[type=email]:not(.browser-default), 
+  input.valid[type=email]:not(.browser-default):focus, 
+  input.valid[type=url]:not(.browser-default), 
+  input.valid[type=url]:not(.browser-default):focus, 
+  input.valid[type=time]:not(.browser-default), 
+  input.valid[type=time]:not(.browser-default):focus, 
+  input.valid[type=date]:not(.browser-default),
+   input.valid[type=date]:not(.browser-default):focus,
+    input.valid[type=datetime]:not(.browser-default), 
+    input.valid[type=datetime]:not(.browser-default):focus, 
+    input.valid[type=datetime-local]:not(.browser-default),
+     input.valid[type=datetime-local]:not(.browser-default):focus, 
+     input.valid[type=tel]:not(.browser-default), 
+     input.valid[type=tel]:not(.browser-default):focus, 
+     input.valid[type=number]:not(.browser-default), 
+     input.valid[type=number]:not(.browser-default):focus,
+      input.valid[type=search]:not(.browser-default), 
+      input.valid[type=search]:not(.browser-default):focus, 
+      textarea.materialize-textarea.valid, 
+      textarea.materialize-textarea.valid:focus,
+       .select-wrapper.valid>input.select-dropdown
+  {
+    border-bottom: 1px solid #d2540b !important;
+      -webkit-box-shadow: 0 1px 0 0 #d2540b !important;
+      box-shadow: 0 1px 0 0 #d2540b !important;
+  }
+  .input-field .prefix.active{
+  color: #d2540b !important
+  }
+  input:not([type]), 
+  input[type=text]:not(.browser-default), 
+  input[type=password]:not(.browser-default), 
+  input[type=email]:not(.browser-default), 
+  input[type=url]:not(.browser-default), 
+  input[type=time]:not(.browser-default), 
+  input[type=date]:not(.browser-default), 
+  input[type=datetime]:not(.browser-default), 
+  input[type=datetime-local]:not(.browser-default), 
+  input[type=tel]:not(.browser-default), 
+  input[type=number]:not(.browser-default), 
+  input[type=search]:not(.browser-default), 
+  textarea.materialize-textarea {
+    border-bottom: 1px solid #d2540b !important;
+      -webkit-box-shadow: 0 1px 0 0 #d2540b !important;
+      box-shadow: 0 1px 0 0 #d2540b !important;
+  }
+  input[type=text]:not(.browser-default):focus:not([read-only])+label,
+  input[type=password]:not(.browser-default):focus:not([read-only])+label,
+  input[type=email]:not(.browser-default):focus:not([read-only])+label,
+  input[type=number]:not(.browser-default):focus:not([read-only])+label {
+    color: #d2540b !important
+  }
+  [type="checkbox"].filled-in:checked+span:not(.lever):after,
+  [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after,
+  [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {   
+      border: 2px solid #d2540b !important;
+      background-color: #d2540b !important;
+  }
+  input[type=text]:disabled,
+   input[type=number]:disabled,
+   select:disabled
+    {
+      background-color:#e6e5e5 !important;  
+      color: black !important;  
+  }
+  
+    .k-state-disabled{
+      background: #e6e5e5;
+    }
+    
+    .k-autocomplete .k-input{
+      color: black !important;
+    }
+    .k-state-disabled, .k-widget[disabled]{
+      opacity: 1.6 !important;
+    }
+   
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.2/web-animations.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@latest/dist/all.css" crossorigin="anonymous" />
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script>
+    </script>
+  <app-root></app-root>
+</body>
+</html>

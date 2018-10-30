@@ -1,0 +1,145 @@
+<app-menu [@slideInOut]="menuState"></app-menu>
+<header>
+  <button (click)="toggleMenu()" class="sidemenu"
+    [ngStyle]="{'padding.em': 0.5}">
+    <span>Menu</span>
+  </button>
+  <div style="float: left;padding: 14px;">
+       &nbsp; <a href="javascript:void(0);"><span>Change Customer | </span></a>
+          <a href="javascript:void(0);"><span>Refresh | </span></a>
+            <a href="javascript:void(0);"><span>Entry | </span></a>
+              <a href="javascript:void(0);"><span>Manage Customers | </span></a>
+                <a href="javascript:void(0);"><span>Search all Customers</span></a>
+            
+   
+  </div>
+  <div style="float: right;padding: 14px;">
+    <a href="javascript:void(0);"><span>My Profile | </span></a>
+      <a href="javascript:void(0);"><span>Contact Us | </span></a>
+        <a href="javascript:void(0);"><span>Logout</span></a>
+  </div>
+ 
+</header>
+<section>
+  <div [ngClass]='sideclass'>
+<label style="float: left;font-family: fantasy;">TEVA / Shipments</label>
+<div style="float:right;">
+    <div class="row">
+        <div class="input-field col s5">
+          <input id="searchfor" type="text" class="validate" [(ngModel)]="inputName" 
+          (ngModelChange)="FilterByName($event)">
+          <label class="active" for="searchfor">Search</label>
+        </div>
+        <div class="input-field col s4">
+            <label style="top: -35px;">Type</label>
+        <select class="browser-default" style="margin-top: 10px;width: 82%;">
+          <option value="" selected>Select Type</option>
+          <option value="1">Level 0</option>
+          <option value="2">Level 500</option>
+          <option value="3">Level 700</option>
+        </select>
+        <div class="col s3"  style="margin-left: 164px;margin-top: -41px;">
+            <a class="btn-floating waves-effect waves-light">
+              <i class="material-icons right">search</i></a>
+        </div>
+       
+          </div>
+      </div>
+</div>
+      <ul id="tabs-swipe-demo" class="tabs" style="margin-left: 4px;">
+          <li class="tab col1 s5"><a href="javascript:void(0);" 
+            (click)="toggleMenu1()"><span [ngClass]='spanclass1'>Confirmed</span></a></li>
+          <li class="tab col1 s5"><a class="active" href="javascript:void(0);"
+             (click)="toggleMenu1()"><span  [ngClass]='spanclass2'>UnConfirmed</span></a></li>
+        
+        </ul>
+        <div id="test-swipe-1" class="col s12" [@slideInOut1]="menuState1">
+            <div class='row' style="width: 100%;" *ngIf="tab1">
+                <div class="panel panel-default" style="width: 100%;">
+                <!-- Default panel contents -->
+                <div class='panel-heading'></div>
+                <div class='panel-body' style="width: 100%;">
+                    <kendo-grid [data]="gridView"
+                     [reorderable]="true" [pageSize]="pageSize"
+                     [skip]="skip" [selectable]="true"
+                     [sortable]="true"
+                     [pageable]="true"
+                     (pageChange)="pageChange($event)"
+                    style="top: 10px;">
+                        <kendo-grid-column field="ProductID" title="ID" width="100" [locked]="true">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                {{dataItem.ProductID}}
+                                <span>
+                                    <i class="material-icons" style="color:#d25010 ;font-size: 20px;">info_outline</i>
+                                </span>
+                              </ng-template>
+                        </kendo-grid-column>
+                        <kendo-grid-column field="ProductName" title="Name" width="250" [locked]="true">
+                        </kendo-grid-column>
+                        <kendo-grid-column field="Category.CategoryName" width="200" title="Category">
+                        </kendo-grid-column>
+                        <kendo-grid-column field="UnitPrice" title="Price" width="80">
+                        </kendo-grid-column>
+                        <kendo-grid-column field="UnitPrice" title="Base Price" width="80">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="UnitPrice" title="Price1" width="100">
+                            </kendo-grid-column>
+                        <kendo-grid-column field="UnitsInStock" title="In stock" width="100">
+                        </kendo-grid-column>
+                        <kendo-grid-column field="UnitsInStock" title="Quantity" width="100">
+                          </kendo-grid-column>
+                          <kendo-grid-column field="UnitsInStock" title="Quantity" width="100">
+                            </kendo-grid-column>
+                        <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+                            <ng-template kendoGridCellTemplate let-dataItem>
+                                <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+                            </ng-template>
+                        </kendo-grid-column>
+                        
+                    </kendo-grid>
+                  
+                 </div>
+                </div> 
+                  </div>
+        </div>
+        <div id="test-swipe-2" class="col s12" [@slideInOut2]="menuState2">
+            <div class='row' style="width: 100%;" *ngIf="tab2">
+                <div class="panel panel-default" style="width: 100%;">
+                <!-- Default panel contents -->
+                <div class='panel-heading'></div>
+                <div class='panel-body' style="width: 100%;">
+                    <table class="responsive-table striped">
+                       <thead>
+                          <th>Id</th>
+                          <th>Name</th>
+                          <th>Description</th>
+                       </thead>
+                       <tbody>
+                          <tr *ngFor="let item of items">
+                             <td>{{item.id}}</td>
+                             <td>{{item.name}}</td>
+                             <td>{{item.description}}</td>
+                          </tr>
+                       </tbody>
+                    </table>
+                    <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+                     <div class="btn-group">
+                          <label style="margin-top:10px">Page {{currentIndex}}/{{pageNumber}}</label>
+                       </div>
+                       <div class="btn-group pull-right">
+                          <ul class="pagination" >
+                             <li [ngClass]="{'disabled': (currentIndex == 1 || pageNumber == 0)}" ><a  (click)="prevPage()" href="#"><<</a></li>
+                                <li *ngFor="let page of pagesIndex"  [ngClass]="{'active': (currentIndex == page)}">
+                                   <a (click)="setPage(page)" href="#" style="margin-left: 13px;">{{page}}</a>
+                                </li>
+                             <li [ngClass]="{'disabled': (currentIndex == pageNumber || pageNumber == 0)}" ><a   (click)="nextPage()" href="#"  style="margin-left: 13px;">>></a></li>
+                          </ul>
+                       </div>
+                    </div>
+                 </div>
+                </div> 
+                  </div>
+        </div>
+  </div>
+</section>
+
